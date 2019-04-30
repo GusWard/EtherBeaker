@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+
+    <TextView
+        android:id="@+id/account_balance_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:textSize="30sp"
+        android:text="@string/account_balance_title"
+        android:textColor="#ffffff"/>
+
+    <ImageView
+        android:id="@+id/refresh_account_balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_refresh_white"
+        android:layout_toRightOf="@id/account_balance_title"
+        android:layout_alignBottom="@id/account_balance_title"
+        android:padding="4dp"/>
+
+    <TextView
+        android:id="@+id/eth_balance_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/account_balance_title"
+        android:text="0.0000 ETH"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/btc_balance_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/eth_balance_text_view"
+        android:text="0.0000 BTC"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/token_balance_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="16dp"
+        android:textSize="30sp"
+        android:text="@string/token_balance_title"
+        android:textColor="#ffffff"/>
+
+    <ImageView
+        android:id="@+id/refresh_token_balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_refresh_white"
+        android:layout_toRightOf="@id/token_balance_title"
+        android:layout_alignBottom="@id/token_balance_title"
+        android:padding="4dp"/>
+
+    <TextView
+        android:id="@+id/token_balance_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/token_balance_title"
+        android:layout_centerHorizontal="true"
+        android:text="0.0000 ETH"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/token_total_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/token_balance_text_view"
+        android:layout_centerHorizontal="true"
+        android:text="Across 0 tokens"/>
+
+</RelativeLayout>
