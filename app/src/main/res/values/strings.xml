@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="app_name">EtherBeaker</string>
+
+    <string name="account_balance_title">Account Balance</string>
+    <string name="token_balance_title">ERC-20 Balance</string>
+
+</resources>
