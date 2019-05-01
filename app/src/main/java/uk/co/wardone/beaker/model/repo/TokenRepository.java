@@ -13,6 +13,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;
+import uk.co.wardone.beaker.BuildConfig;
 import uk.co.wardone.beaker.model.api.blockexplorer.etherscan.EtherscanService;
 import uk.co.wardone.beaker.model.api.blockexplorer.etherscan.data.ERC20Balance;
 import uk.co.wardone.beaker.model.api.exchange.shapeshift.ShapeShiftService;
@@ -115,7 +116,7 @@ public class TokenRepository extends BaseRepository<String, List<ERC20Token>>{
 
                 try {
 
-                    Call<ERC20Balance> balanceCall = etherscanService.getTokenBalance(EtherscanService.TEST_API_KEY, EtherscanService.TEST_ADDRESS, tokenDefinition.contract);
+                    Call<ERC20Balance> balanceCall = etherscanService.getTokenBalance(BuildConfig.ETHERSCAN_TEST_API_KEY, BuildConfig.TEST_ETHEREUM_WALLET_ADDRESS, tokenDefinition.contract);
                     Response<ERC20Balance> balanceResponse = balanceCall.execute();
 
                     if(balanceResponse.isSuccessful() && balanceResponse.body() != null){

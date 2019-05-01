@@ -11,6 +11,7 @@ import androidx.lifecycle.LiveData;
 
 import retrofit2.Call;
 import retrofit2.Response;
+import uk.co.wardone.beaker.BuildConfig;
 import uk.co.wardone.beaker.model.api.blockexplorer.etherscan.EtherscanService;
 import uk.co.wardone.beaker.model.api.blockexplorer.etherscan.data.Balance;
 import uk.co.wardone.beaker.model.api.exchange.shapeshift.ShapeShiftService;
@@ -96,7 +97,7 @@ public class AccountBalanceRepository extends BaseRepository<String, AccountBala
 
         executorService.submit(() -> {
 
-            Call<Balance> balanceCall = etherscanService.getBalance(EtherscanService.TEST_API_KEY, EtherscanService.TEST_ADDRESS);
+            Call<Balance> balanceCall = etherscanService.getBalance(BuildConfig.ETHERSCAN_TEST_API_KEY, BuildConfig.TEST_ETHEREUM_WALLET_ADDRESS);
 
             try {
 

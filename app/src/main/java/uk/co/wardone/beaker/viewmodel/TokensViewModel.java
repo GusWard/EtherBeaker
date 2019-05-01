@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+import uk.co.wardone.beaker.BuildConfig;
 import uk.co.wardone.beaker.model.api.blockexplorer.etherscan.EtherscanService;
 import uk.co.wardone.beaker.model.data.AppDatabase;
 import uk.co.wardone.beaker.model.data.model.ERC20Token;
@@ -23,7 +24,7 @@ public class TokensViewModel extends AndroidViewModel {
         super(application);
 
         appDatabase = AppDatabase.getInstance(application);
-        tokens = TokenRepository.getInstance(appDatabase).get(EtherscanService.TEST_ADDRESS);
+        tokens = TokenRepository.getInstance(appDatabase).get(BuildConfig.TEST_ETHEREUM_WALLET_ADDRESS);
 
     }
 

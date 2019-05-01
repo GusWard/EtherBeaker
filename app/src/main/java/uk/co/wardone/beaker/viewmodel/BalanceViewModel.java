@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import uk.co.wardone.beaker.BuildConfig;
 import uk.co.wardone.beaker.model.api.blockexplorer.etherscan.EtherscanService;
 import uk.co.wardone.beaker.model.data.AppDatabase;
 import uk.co.wardone.beaker.model.data.model.AccountBalance;
@@ -24,8 +25,8 @@ public class BalanceViewModel extends AndroidViewModel {
         super(application);
 
         appDatabase = AppDatabase.getInstance(application);
-        balanceLiveData = AccountBalanceRepository.getInstance(appDatabase).get(EtherscanService.TEST_ADDRESS);
-        tokenBalance = TokenBalanceRepository.getInstance(appDatabase).get(EtherscanService.TEST_ADDRESS);
+        balanceLiveData = AccountBalanceRepository.getInstance(appDatabase).get(BuildConfig.TEST_ETHEREUM_WALLET_ADDRESS);
+        tokenBalance = TokenBalanceRepository.getInstance(appDatabase).get(BuildConfig.TEST_ETHEREUM_WALLET_ADDRESS);
 
     }
 
@@ -45,13 +46,13 @@ public class BalanceViewModel extends AndroidViewModel {
 
     public void refreshAccountBalance(){
 
-        AccountBalanceRepository.getInstance(appDatabase).refresh(EtherscanService.TEST_ADDRESS);
+        AccountBalanceRepository.getInstance(appDatabase).refresh(BuildConfig.TEST_ETHEREUM_WALLET_ADDRESS);
 
     }
 
     public void refreshTokenBalance(){
 
-        TokenBalanceRepository.getInstance(appDatabase).refresh(EtherscanService.TEST_ADDRESS);
+        TokenBalanceRepository.getInstance(appDatabase).refresh(BuildConfig.TEST_ETHEREUM_WALLET_ADDRESS);
 
     }
 

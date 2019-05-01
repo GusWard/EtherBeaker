@@ -17,8 +17,14 @@ android {
     }
     buildTypes {
         release {
+            buildConfigField 'String', "ETHERSCAN_TEST_API_KEY", ETHERSCAN_TEST_API_KEY
+            buildConfigField 'String', "TEST_ETHEREUM_WALLET_ADDRESS", TEST_ETHEREUM_WALLET_ADDRESS
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            buildConfigField 'String', "ETHERSCAN_TEST_API_KEY", ETHERSCAN_TEST_API_KEY
+            buildConfigField 'String', "TEST_ETHEREUM_WALLET_ADDRESS", TEST_ETHEREUM_WALLET_ADDRESS
         }
     }
     compileOptions {
