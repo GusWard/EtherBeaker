@@ -17,11 +17,11 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.runner.AndroidJUnit4;
-import uk.co.wardone.beaker.modal.api.blockexplorer.etherscan.EtherscanService;
-import uk.co.wardone.beaker.modal.data.cache.AccountBalanceDao;
-import uk.co.wardone.beaker.modal.data.model.AccountBalance;
-import uk.co.wardone.beaker.modal.data.AppDatabase;
-import uk.co.wardone.beaker.modal.repo.AccountBalanceRepository;
+import uk.co.wardone.beaker.model.api.blockexplorer.etherscan.EtherscanService;
+import uk.co.wardone.beaker.model.data.cache.AccountBalanceDao;
+import uk.co.wardone.beaker.model.data.model.AccountBalance;
+import uk.co.wardone.beaker.model.data.AppDatabase;
+import uk.co.wardone.beaker.model.repo.AccountBalanceRepository;
 
 import static org.hamcrest.CoreMatchers.is;
 

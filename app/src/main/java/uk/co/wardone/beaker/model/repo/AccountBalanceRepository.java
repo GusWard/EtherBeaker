@@ -1,4 +1,4 @@
-package uk.co.wardone.beaker.modal.repo;
+package uk.co.wardone.beaker.model.repo;
 
 import android.util.Log;
 
@@ -11,13 +11,13 @@ import androidx.lifecycle.LiveData;
 
 import retrofit2.Call;
 import retrofit2.Response;
-import uk.co.wardone.beaker.modal.api.blockexplorer.etherscan.EtherscanService;
-import uk.co.wardone.beaker.modal.api.blockexplorer.etherscan.data.Balance;
-import uk.co.wardone.beaker.modal.api.exchange.shapeshift.ShapeShiftService;
-import uk.co.wardone.beaker.modal.api.exchange.shapeshift.data.Market;
-import uk.co.wardone.beaker.modal.data.cache.AccountBalanceDao;
-import uk.co.wardone.beaker.modal.data.model.AccountBalance;
-import uk.co.wardone.beaker.modal.data.AppDatabase;
+import uk.co.wardone.beaker.model.api.blockexplorer.etherscan.EtherscanService;
+import uk.co.wardone.beaker.model.api.blockexplorer.etherscan.data.Balance;
+import uk.co.wardone.beaker.model.api.exchange.shapeshift.ShapeShiftService;
+import uk.co.wardone.beaker.model.api.exchange.shapeshift.data.Market;
+import uk.co.wardone.beaker.model.data.cache.AccountBalanceDao;
+import uk.co.wardone.beaker.model.data.model.AccountBalance;
+import uk.co.wardone.beaker.model.data.AppDatabase;
 
 public class AccountBalanceRepository extends BaseRepository<String, AccountBalance>{
 

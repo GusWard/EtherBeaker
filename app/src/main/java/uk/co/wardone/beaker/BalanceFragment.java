@@ -16,9 +16,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
 
 import butterknife.BindView;
-import uk.co.wardone.beaker.modal.data.model.AccountBalance;
-import uk.co.wardone.beaker.modal.data.model.TokenBalance;
-import uk.co.wardone.beaker.viewmodal.BalanceViewModal;
+import uk.co.wardone.beaker.model.data.model.AccountBalance;
+import uk.co.wardone.beaker.model.data.model.TokenBalance;
+import uk.co.wardone.beaker.viewmodel.BalanceViewModel;
 
 public class BalanceFragment extends ButterknifeFragment {
 
@@ -40,15 +40,15 @@ public class BalanceFragment extends ButterknifeFragment {
     @BindView(R.id.refresh_token_balance)
     ImageView refreshTokenBalanceView;
 
-    private BalanceViewModal accountViewModal;
+    private BalanceViewModel accountViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        accountViewModal = ViewModelProviders.of(this).get(BalanceViewModal.class);
-        observeBalanceData(accountViewModal);
-        observeTokenBalanceData(accountViewModal);
+        accountViewModel = ViewModelProviders.of(this).get(BalanceViewModel.class);
+        observeBalanceData(accountViewModel);
+        observeTokenBalanceData(accountViewModel);
 
     }
 
@@ -71,7 +71,7 @@ public class BalanceFragment extends ButterknifeFragment {
                     .setInterpolator(new DecelerateInterpolator())
                     .withEndAction(() -> refreshAccountBalanceView.setClickable(true))
                     .start();
-            accountViewModal.refreshAccountBalance();
+            accountViewModel.refreshAccountBalance();
 
         });
 
@@ -84,18 +84,18 @@ public class BalanceFragment extends ButterknifeFragment {
                     .setInterpolator(new DecelerateInterpolator())
                     .withEndAction(() -> refreshTokenBalanceView.setClickable(true))
                     .start();
-            accountViewModal.refreshTokenBalance();
+            accountViewModel.refreshTokenBalance();
 
         });
     }
 
-    private void observeBalanceData(BalanceViewModal accountViewModal) {
+    private void observeBalanceData(BalanceViewModel accountViewModel) {
 
-        LiveData<AccountBalance> balanceLiveData = accountViewModal.getBalanceLiveData();
+        LiveData<AccountBalance> balanceLiveData = accountViewModel.getBalanceLiveData();
 
         if(balanceLiveData != null){
 
-            accountViewModal.getBalanceLiveData().observe(this, this::updateAccountBalance);
+            accountViewModel.getBalanceLiveData().observe(this, this::updateAccountBalance);
 
         }
     }
@@ -121,13 +121,13 @@ public class BalanceFragment extends ButterknifeFragment {
 
     }
 
-    private void observeTokenBalanceData(BalanceViewModal accountViewModal) {
+    private void observeTokenBalanceData(BalanceViewModel accountViewModel) {
 
-        LiveData<TokenBalance> tokenBalanceLiveData = accountViewModal.getTokenBalance();
+        LiveData<TokenBalance> tokenBalanceLiveData = accountViewModel.getTokenBalance();
 
         if(tokenBalanceLiveData != null){
 
-            accountViewModal.getTokenBalance().observe(this, this::updateTokenBalance);
+            accountViewModel.getTokenBalance().observe(this, this::updateTokenBalance);
 
         }
     }

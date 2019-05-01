@@ -1,4 +1,4 @@
-package uk.co.wardone.beaker.modal.repo;
+package uk.co.wardone.beaker.model.repo;
 
 import android.util.Log;
 
@@ -13,13 +13,13 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;
-import uk.co.wardone.beaker.modal.api.blockexplorer.etherscan.EtherscanService;
-import uk.co.wardone.beaker.modal.api.blockexplorer.etherscan.data.ERC20Balance;
-import uk.co.wardone.beaker.modal.api.exchange.shapeshift.ShapeShiftService;
-import uk.co.wardone.beaker.modal.api.exchange.shapeshift.data.Market;
-import uk.co.wardone.beaker.modal.data.AppDatabase;
-import uk.co.wardone.beaker.modal.data.cache.ERC20TokenDao;
-import uk.co.wardone.beaker.modal.data.model.ERC20Token;
+import uk.co.wardone.beaker.model.api.blockexplorer.etherscan.EtherscanService;
+import uk.co.wardone.beaker.model.api.blockexplorer.etherscan.data.ERC20Balance;
+import uk.co.wardone.beaker.model.api.exchange.shapeshift.ShapeShiftService;
+import uk.co.wardone.beaker.model.api.exchange.shapeshift.data.Market;
+import uk.co.wardone.beaker.model.data.AppDatabase;
+import uk.co.wardone.beaker.model.data.cache.ERC20TokenDao;
+import uk.co.wardone.beaker.model.data.model.ERC20Token;
 
 public class TokenRepository extends BaseRepository<String, List<ERC20Token>>{
 

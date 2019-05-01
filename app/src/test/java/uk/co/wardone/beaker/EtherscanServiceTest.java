@@ -6,8 +6,8 @@ import org.junit.Test;
 import java.io.IOException;
 import java.math.BigDecimal;
 
-import uk.co.wardone.beaker.modal.api.blockexplorer.etherscan.EtherscanService;
-import uk.co.wardone.beaker.modal.api.blockexplorer.etherscan.data.Balance;
+import uk.co.wardone.beaker.model.api.blockexplorer.etherscan.EtherscanService;
+import uk.co.wardone.beaker.model.api.blockexplorer.etherscan.data.Balance;
 
 import static org.hamcrest.CoreMatchers.is;
 

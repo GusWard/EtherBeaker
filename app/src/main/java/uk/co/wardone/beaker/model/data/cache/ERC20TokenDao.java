@@ -1,4 +1,4 @@
-package uk.co.wardone.beaker.modal.data.cache;
+package uk.co.wardone.beaker.model.data.cache;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -6,7 +6,7 @@ import androidx.room.Query;
 
 import java.util.List;
 
-import uk.co.wardone.beaker.modal.data.model.ERC20Token;
+import uk.co.wardone.beaker.model.data.model.ERC20Token;
 
 @Dao
 public interface ERC20TokenDao extends BaseDao<List<ERC20Token>> {

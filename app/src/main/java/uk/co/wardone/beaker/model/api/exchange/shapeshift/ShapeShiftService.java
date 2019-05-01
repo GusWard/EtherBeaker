@@ -1,4 +1,4 @@
-package uk.co.wardone.beaker.modal.api.exchange.shapeshift;
+package uk.co.wardone.beaker.model.api.exchange.shapeshift;
 
 import com.github.aurae.retrofit2.LoganSquareConverterFactory;
 
@@ -8,7 +8,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import uk.co.wardone.beaker.modal.api.exchange.shapeshift.data.Market;
+import uk.co.wardone.beaker.model.api.exchange.shapeshift.data.Market;
 
 public interface ShapeShiftService {
 

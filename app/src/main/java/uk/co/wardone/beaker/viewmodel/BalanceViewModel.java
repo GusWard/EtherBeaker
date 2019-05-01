@@ -1,4 +1,4 @@
-package uk.co.wardone.beaker.viewmodal;
+package uk.co.wardone.beaker.viewmodel;
 
 import android.app.Application;
 
@@ -7,20 +7,20 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import uk.co.wardone.beaker.modal.api.blockexplorer.etherscan.EtherscanService;
-import uk.co.wardone.beaker.modal.data.AppDatabase;
-import uk.co.wardone.beaker.modal.data.model.AccountBalance;
-import uk.co.wardone.beaker.modal.data.model.TokenBalance;
-import uk.co.wardone.beaker.modal.repo.AccountBalanceRepository;
-import uk.co.wardone.beaker.modal.repo.TokenBalanceRepository;
+import uk.co.wardone.beaker.model.api.blockexplorer.etherscan.EtherscanService;
+import uk.co.wardone.beaker.model.data.AppDatabase;
+import uk.co.wardone.beaker.model.data.model.AccountBalance;
+import uk.co.wardone.beaker.model.data.model.TokenBalance;
+import uk.co.wardone.beaker.model.repo.AccountBalanceRepository;
+import uk.co.wardone.beaker.model.repo.TokenBalanceRepository;
 
-public class BalanceViewModal extends AndroidViewModel {
+public class BalanceViewModel extends AndroidViewModel {
 
     private AppDatabase appDatabase;
     private LiveData<AccountBalance> balanceLiveData;
     private LiveData<TokenBalance> tokenBalance;
 
-    public BalanceViewModal(@NonNull Application application) {
+    public BalanceViewModel(@NonNull Application application) {
         super(application);
 
         appDatabase = AppDatabase.getInstance(application);

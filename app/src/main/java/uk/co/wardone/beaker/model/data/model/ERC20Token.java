@@ -1,4 +1,4 @@
-package uk.co.wardone.beaker.modal.data.model;
+package uk.co.wardone.beaker.model.data.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

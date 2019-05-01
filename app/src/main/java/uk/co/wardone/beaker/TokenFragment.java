@@ -9,23 +9,18 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.customview.widget.ViewDragHelper;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import uk.co.wardone.beaker.modal.data.model.ERC20Token;
-import uk.co.wardone.beaker.viewmodal.BalanceViewModal;
-import uk.co.wardone.beaker.viewmodal.TokensViewModel;
+import uk.co.wardone.beaker.model.data.model.ERC20Token;
+import uk.co.wardone.beaker.viewmodel.TokensViewModel;
 
 public class TokenFragment extends ButterknifeFragment {
 

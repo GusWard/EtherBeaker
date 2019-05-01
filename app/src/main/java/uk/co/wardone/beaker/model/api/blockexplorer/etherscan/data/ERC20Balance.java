@@ -1,4 +1,4 @@
-package uk.co.wardone.beaker.modal.api.blockexplorer.etherscan.data;
+package uk.co.wardone.beaker.model.api.blockexplorer.etherscan.data;
 
 import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;

@@ -1,13 +1,12 @@
-package uk.co.wardone.beaker.modal.repo;
+package uk.co.wardone.beaker.model.repo;
 
-import androidx.annotation.WorkerThread;
 import androidx.lifecycle.LiveData;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import uk.co.wardone.beaker.modal.data.AppDatabase;
+import uk.co.wardone.beaker.model.data.AppDatabase;
 
 public abstract class BaseRepository<K, T> {
 

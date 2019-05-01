@@ -1,4 +1,4 @@
-package uk.co.wardone.beaker.viewmodal;
+package uk.co.wardone.beaker.viewmodel;
 
 import android.app.Application;
 
@@ -9,10 +9,10 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import uk.co.wardone.beaker.modal.api.blockexplorer.etherscan.EtherscanService;
-import uk.co.wardone.beaker.modal.data.AppDatabase;
-import uk.co.wardone.beaker.modal.data.model.ERC20Token;
-import uk.co.wardone.beaker.modal.repo.TokenRepository;
+import uk.co.wardone.beaker.model.api.blockexplorer.etherscan.EtherscanService;
+import uk.co.wardone.beaker.model.data.AppDatabase;
+import uk.co.wardone.beaker.model.data.model.ERC20Token;
+import uk.co.wardone.beaker.model.repo.TokenRepository;
 
 public class TokensViewModel extends AndroidViewModel {
 

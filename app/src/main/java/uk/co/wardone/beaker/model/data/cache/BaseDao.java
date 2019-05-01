@@ -1,6 +1,5 @@
-package uk.co.wardone.beaker.modal.data.cache;
+package uk.co.wardone.beaker.model.data.cache;
 
-import androidx.room.Dao;
 import androidx.room.Insert;
 
 import static androidx.room.OnConflictStrategy.REPLACE;

@@ -1,4 +1,4 @@
-package uk.co.wardone.beaker.modal.api.exchange.shapeshift.data;
+package uk.co.wardone.beaker.model.api.exchange.shapeshift.data;
 
 import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;

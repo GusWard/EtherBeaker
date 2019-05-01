@@ -1,4 +1,4 @@
-package uk.co.wardone.beaker.modal.data.model;
+package uk.co.wardone.beaker.model.data.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class AccountBalance {
+public class TokenBalance {
 
     @NonNull
     @PrimaryKey
@@ -16,26 +16,27 @@ public class AccountBalance {
     @ColumnInfo(name = "balance")
     public double balance;
 
-    @ColumnInfo(name = "btc_balance")
-    public double btcBalance;
+    @ColumnInfo(name = "total_tokens")
+    public int totalTokens;
 
     @ColumnInfo(name = "updated")
     public long updated;
 
-    public AccountBalance(@NonNull String address, double balance, double btcBalance) {
+    public TokenBalance(@NonNull String address, double balance, int totalTokens) {
 
         this.address = address;
         this.balance = balance;
-        this.btcBalance = btcBalance;
+        this.totalTokens = totalTokens;
         this.updated = System.currentTimeMillis();
 
     }
 
     @Override
     public String toString() {
-        return "AccountBalance{" +
+        return "ERC20Balance{" +
                 "address='" + address + '\'' +
                 ", balance=" + balance +
+                ", totalTokens=" + totalTokens +
                 ", updated=" + updated +
                 '}';
     }

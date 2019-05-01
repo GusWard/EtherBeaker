@@ -1,4 +1,4 @@
-package uk.co.wardone.beaker.modal.repo;
+package uk.co.wardone.beaker.model.repo;
 
 import android.util.Log;
 
@@ -8,10 +8,10 @@ import androidx.lifecycle.Observer;
 import java.util.HashMap;
 import java.util.List;
 
-import uk.co.wardone.beaker.modal.data.AppDatabase;
-import uk.co.wardone.beaker.modal.data.cache.TokenBalanceDao;
-import uk.co.wardone.beaker.modal.data.model.ERC20Token;
-import uk.co.wardone.beaker.modal.data.model.TokenBalance;
+import uk.co.wardone.beaker.model.data.AppDatabase;
+import uk.co.wardone.beaker.model.data.cache.TokenBalanceDao;
+import uk.co.wardone.beaker.model.data.model.ERC20Token;
+import uk.co.wardone.beaker.model.data.model.TokenBalance;
 
 public class TokenBalanceRepository extends BaseRepository<String, TokenBalance>{
 

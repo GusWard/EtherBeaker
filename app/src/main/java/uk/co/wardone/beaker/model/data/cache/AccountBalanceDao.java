@@ -1,10 +1,10 @@
-package uk.co.wardone.beaker.modal.data.cache;
+package uk.co.wardone.beaker.model.data.cache;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 
-import uk.co.wardone.beaker.modal.data.model.AccountBalance;
+import uk.co.wardone.beaker.model.data.model.AccountBalance;
 
 @Dao
 public interface AccountBalanceDao extends BaseDao<AccountBalance> {
