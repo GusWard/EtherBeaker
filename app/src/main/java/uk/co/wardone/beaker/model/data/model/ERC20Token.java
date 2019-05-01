@@ -7,6 +7,8 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(indices = {@Index("address")},
@@ -64,5 +66,24 @@ public class ERC20Token {
                 ", ethBalance=" + ethBalance +
                 ", updated=" + updated +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ERC20Token that = (ERC20Token) o;
+        return Double.compare(that.balance, balance) == 0 &&
+                Double.compare(that.ethBalance, ethBalance) == 0 &&
+                updated == that.updated &&
+                primaryKey.equals(that.primaryKey) &&
+                address.equals(that.address) &&
+                name.equals(that.name) &&
+                symbol.equals(that.symbol);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(primaryKey, address, name, symbol, balance, ethBalance, updated);
     }
 }

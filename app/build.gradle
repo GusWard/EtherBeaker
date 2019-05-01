@@ -51,8 +51,8 @@ dependencies {
     implementation group: 'javax.annotation', name: 'javax.annotation-api', version: '1.2'
     implementation "androidx.room:room-runtime:2.1.0-alpha06"
     annotationProcessor "androidx.room:room-compiler:2.1.0-alpha04"
-    implementation "android.arch.lifecycle:extensions:1.1.1"
-    implementation "android.arch.lifecycle:viewmodel:1.1.1"
+    implementation "android.arch.lifecycle:extensions:2.1.0-alpha04"
+    implementation "android.arch.lifecycle:viewmodel:2.1.0-alpha04"
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'

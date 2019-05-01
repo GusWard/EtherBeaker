@@ -12,18 +12,16 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
 
 import butterknife.BindView;
-import uk.co.wardone.beaker.model.data.model.AccountBalance;
-import uk.co.wardone.beaker.model.data.model.TokenBalance;
 import uk.co.wardone.beaker.viewmodel.BalanceViewModel;
+import uk.co.wardone.beaker.viewmodel.data.BalanceViewData;
 
-public class BalanceFragment extends ButterknifeFragment {
+public class BalanceFragment extends ButterKnifeFragment {
 
-    private static final String ETH_SUFFIX = " ETH";
-    private static final String BTC_SUFFIX = " BTC";
+    private static final String ETH_SUFFIX = "ETH";
+    private static final String BTC_SUFFIX = "BTC";
 
     @BindView(R.id.eth_balance_text_view)
     TextView ethBalanceTextView;
@@ -41,14 +39,22 @@ public class BalanceFragment extends ButterknifeFragment {
     ImageView refreshTokenBalanceView;
 
     private BalanceViewModel accountViewModel;
+    private BalanceViewData currentBalanceViewData;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        currentBalanceViewData = new BalanceViewData();
+
         accountViewModel = ViewModelProviders.of(this).get(BalanceViewModel.class);
-        observeBalanceData(accountViewModel);
-        observeTokenBalanceData(accountViewModel);
+        accountViewModel.getBalanceViewData().observe(this, balanceViewData -> {
+
+            refresh(balanceViewData);
+            /* create new instance so we are not comparing LiveData instance with itself */
+            currentBalanceViewData = BalanceViewData.from(balanceViewData);
+
+        });
 
     }
 
@@ -89,67 +95,71 @@ public class BalanceFragment extends ButterknifeFragment {
         });
     }
 
-    private void observeBalanceData(BalanceViewModel accountViewModel) {
+    private void refresh(BalanceViewData balanceViewData) {
 
-        LiveData<AccountBalance> balanceLiveData = accountViewModel.getBalanceLiveData();
+        updateEtherBalance(balanceViewData);
+        updateBtcBalance(balanceViewData);
+        updateTokenBalance(balanceViewData);
+        updateTokenTotal(balanceViewData);
 
-        if(balanceLiveData != null){
-
-            accountViewModel.getBalanceLiveData().observe(this, this::updateAccountBalance);
-
-        }
     }
 
     @SuppressLint("DefaultLocale")
-    private void updateAccountBalance(AccountBalance accountBalance) {
+    private void updateEtherBalance(BalanceViewData balanceViewData) {
 
-        float currentEthValue = Float.parseFloat(ethBalanceTextView.getText().toString().replaceAll("[^\\d.]", ""));
+        if(currentBalanceViewData.ethBalance != balanceViewData.ethBalance){
 
-        ValueAnimator ethValueAnimator = ValueAnimator.ofFloat(currentEthValue, accountBalance == null ? 0 : (float) accountBalance.balance);
-        ethValueAnimator.addUpdateListener(valueAnimator1 -> ethBalanceTextView.setText(String.format("%.4f" + ETH_SUFFIX, (float)valueAnimator1.getAnimatedValue())));
-        ethValueAnimator.setDuration(500);
-        ethValueAnimator.setInterpolator(new DecelerateInterpolator());
-        ethValueAnimator.start();
-
-        float currentBtcValue = Float.parseFloat(btcBalanceTextView.getText().toString().replaceAll("[^\\d.]", ""));
-
-        ValueAnimator btcValueAnimator = ValueAnimator.ofFloat(currentBtcValue, accountBalance == null ? 0 : (float) accountBalance.btcBalance);
-        btcValueAnimator.addUpdateListener(valueAnimator1 -> btcBalanceTextView.setText(String.format("%.4f" + BTC_SUFFIX, (float)valueAnimator1.getAnimatedValue())));
-        btcValueAnimator.setDuration(500);
-        btcValueAnimator.setInterpolator(new DecelerateInterpolator());
-        btcValueAnimator.start();
-
-    }
-
-    private void observeTokenBalanceData(BalanceViewModel accountViewModel) {
-
-        LiveData<TokenBalance> tokenBalanceLiveData = accountViewModel.getTokenBalance();
-
-        if(tokenBalanceLiveData != null){
-
-            accountViewModel.getTokenBalance().observe(this, this::updateTokenBalance);
+            ValueAnimator ethValueAnimator = ValueAnimator.ofFloat(currentBalanceViewData.ethBalance, balanceViewData.ethBalance);
+            ethValueAnimator.addUpdateListener(va -> ethBalanceTextView.setText(String.format("%.4f %s", (float)va.getAnimatedValue(), ETH_SUFFIX)));
+            ethValueAnimator.setDuration(500);
+            ethValueAnimator.setInterpolator(new DecelerateInterpolator());
+            ethValueAnimator.start();
 
         }
+
     }
 
     @SuppressLint("DefaultLocale")
-    private void updateTokenBalance(TokenBalance tokenBalance) {
+    private void updateBtcBalance(BalanceViewData balanceViewData) {
 
-        float currentValue = Float.parseFloat(tokenBalanceTextView.getText().toString().replaceAll("[^\\d.]", ""));
+        if(currentBalanceViewData.btcBalance != balanceViewData.btcBalance){
 
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(currentValue, tokenBalance == null ? 0 : (float) tokenBalance.balance);
-        valueAnimator.addUpdateListener(valueAnimator1 -> tokenBalanceTextView.setText(String.format("%.4f" + ETH_SUFFIX, (float)valueAnimator1.getAnimatedValue())));
-        valueAnimator.setDuration(500);
-        valueAnimator.setInterpolator(new DecelerateInterpolator());
-        valueAnimator.start();
+            ValueAnimator btcValueAnimator = ValueAnimator.ofFloat(currentBalanceViewData.btcBalance, balanceViewData.btcBalance);
+            btcValueAnimator.addUpdateListener(va -> btcBalanceTextView.setText(String.format("%.4f %s", (float)va.getAnimatedValue(), BTC_SUFFIX)));
+            btcValueAnimator.setDuration(500);
+            btcValueAnimator.setInterpolator(new DecelerateInterpolator());
+            btcValueAnimator.start();
 
-        int currentTotalTokens = Integer.parseInt(totalTokenCountView.getText().toString().replaceAll("[^\\d.]", ""));
+        }
 
-        ValueAnimator totalValueAnimator = ValueAnimator.ofInt(currentTotalTokens, tokenBalance == null ? 0 : tokenBalance.totalTokens);
-        totalValueAnimator.addUpdateListener(valueAnimator1 -> totalTokenCountView.setText(String.format("Across %d tokens", (int)valueAnimator1.getAnimatedValue())));
-        totalValueAnimator.setDuration(500);
-        totalValueAnimator.setInterpolator(new DecelerateInterpolator());
-        totalValueAnimator.start();
+    }
 
+    @SuppressLint("DefaultLocale")
+    private void updateTokenBalance(BalanceViewData balanceViewData) {
+
+        if(currentBalanceViewData.aggregateTokenBalance != balanceViewData.aggregateTokenBalance){
+
+            ValueAnimator valueAnimator = ValueAnimator.ofFloat(currentBalanceViewData.aggregateTokenBalance, balanceViewData.aggregateTokenBalance);
+            valueAnimator.addUpdateListener(va -> tokenBalanceTextView.setText(String.format("%.4f %s", (float)va.getAnimatedValue(), ETH_SUFFIX)));
+            valueAnimator.setDuration(500);
+            valueAnimator.setInterpolator(new DecelerateInterpolator());
+            valueAnimator.start();
+
+        }
+
+    }
+
+    @SuppressLint("DefaultLocale")
+    private void updateTokenTotal(BalanceViewData balanceViewData) {
+
+        if(currentBalanceViewData.totalTokens != balanceViewData.totalTokens){
+
+            ValueAnimator totalValueAnimator = ValueAnimator.ofInt(currentBalanceViewData.totalTokens, balanceViewData.totalTokens);
+            totalValueAnimator.addUpdateListener(va -> totalTokenCountView.setText(String.format("Across %d tokens", (int)va.getAnimatedValue())));
+            totalValueAnimator.setDuration(500);
+            totalValueAnimator.setInterpolator(new DecelerateInterpolator());
+            totalValueAnimator.start();
+
+        }
     }
 }

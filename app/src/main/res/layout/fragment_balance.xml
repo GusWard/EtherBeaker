@@ -31,7 +31,7 @@
         android:textColor="#ffffff"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/account_balance_title"
-        android:text="0.0000 ETH"
+        android:text="@string/loading"
         android:textStyle="bold"/>
 
     <TextView
@@ -42,7 +42,7 @@
         android:textColor="#ffffff"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/eth_balance_text_view"
-        android:text="0.0000 BTC"
+        android:text="@string/loading"
         android:textStyle="bold"/>
 
     <TextView
@@ -73,7 +73,7 @@
         android:textColor="#ffffff"
         android:layout_below="@+id/token_balance_title"
         android:layout_centerHorizontal="true"
-        android:text="0.0000 ETH"
+        android:text="@string/loading"
         android:textStyle="bold"/>
 
     <TextView

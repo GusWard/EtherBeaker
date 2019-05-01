@@ -14,15 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import uk.co.wardone.beaker.model.data.model.ERC20Token;
 import uk.co.wardone.beaker.viewmodel.TokensViewModel;
+import uk.co.wardone.beaker.viewmodel.data.TokensViewData;
 
-public class TokenFragment extends ButterknifeFragment {
+public class TokenFragment extends ButterKnifeFragment {
 
     @BindView(R.id.list)
     RecyclerView listView;
@@ -35,7 +34,12 @@ public class TokenFragment extends ButterknifeFragment {
         super.onCreate(savedInstanceState);
 
         tokensViewModel = ViewModelProviders.of(this).get(TokensViewModel.class);
-        observeTokens(tokensViewModel);
+        tokensViewModel.getTokensViewData().observe(this, tokensViewData -> {
+
+            tokenAdapter.setTokens(tokensViewData.tokens);
+            tokenAdapter.notifyDataSetChanged();
+
+        });
 
     }
 
@@ -57,33 +61,6 @@ public class TokenFragment extends ButterknifeFragment {
 
     }
 
-    private void observeTokens(TokensViewModel tokensViewModel) {
-
-        tokensViewModel.getTokens().observe(this, erc20Tokens -> {
-
-            Collections.sort(erc20Tokens, (t1, t2) -> {
-
-                if(t1.ethBalance < t2.ethBalance){
-
-                    return 1;
-
-                }else if(t1.ethBalance > t2.ethBalance){
-
-                    return -1;
-
-                }else{
-
-                    return 0;
-
-                }
-            });
-
-            tokenAdapter.setTokens(erc20Tokens);
-            tokenAdapter.notifyDataSetChanged();
-
-        });
-    }
-
     public class TokenViewHolder extends RecyclerView.ViewHolder{
 
         @BindView(R.id.title)
@@ -103,9 +80,9 @@ public class TokenFragment extends ButterknifeFragment {
 
     private class TokenAdapter extends RecyclerView.Adapter<TokenViewHolder>{
 
-        private List<ERC20Token> tokens = new ArrayList<>();
+        private List<TokensViewData.TokenItem> tokens = new ArrayList<>();
 
-        public void setTokens(List<ERC20Token> tokens) {
+        public void setTokens(List<TokensViewData.TokenItem> tokens) {
             this.tokens = tokens;
         }
 
@@ -121,11 +98,11 @@ public class TokenFragment extends ButterknifeFragment {
         @Override
         public void onBindViewHolder(@NonNull TokenViewHolder holder, int position) {
 
-            ERC20Token erc20Token = tokens.get(position);
+            TokensViewData.TokenItem tokenItem = tokens.get(position);
 
-            holder.title.setText(erc20Token.name);
-            holder.tokenBalance.setText(String.format("%.4f %s", erc20Token.balance, erc20Token.symbol.toUpperCase()));
-            holder.ethBalance.setText(String.format("%.4f ETH", erc20Token.ethBalance));
+            holder.title.setText(tokenItem.name);
+            holder.tokenBalance.setText(String.format("%.4f %s", tokenItem.balance, tokenItem.symbol.toUpperCase()));
+            holder.ethBalance.setText(String.format("%.4f ETH", tokenItem.ethBalance));
 
         }
 

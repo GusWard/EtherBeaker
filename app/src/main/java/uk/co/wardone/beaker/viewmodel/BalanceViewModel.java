@@ -3,44 +3,75 @@ package uk.co.wardone.beaker.viewmodel;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import uk.co.wardone.beaker.BuildConfig;
-import uk.co.wardone.beaker.model.api.blockexplorer.etherscan.EtherscanService;
 import uk.co.wardone.beaker.model.data.AppDatabase;
 import uk.co.wardone.beaker.model.data.model.AccountBalance;
 import uk.co.wardone.beaker.model.data.model.TokenBalance;
 import uk.co.wardone.beaker.model.repo.AccountBalanceRepository;
 import uk.co.wardone.beaker.model.repo.TokenBalanceRepository;
+import uk.co.wardone.beaker.viewmodel.data.BalanceViewData;
 
 public class BalanceViewModel extends AndroidViewModel {
 
     private AppDatabase appDatabase;
-    private LiveData<AccountBalance> balanceLiveData;
-    private LiveData<TokenBalance> tokenBalance;
+    private MutableLiveData<BalanceViewData> balanceViewData;
 
     public BalanceViewModel(@NonNull Application application) {
         super(application);
 
         appDatabase = AppDatabase.getInstance(application);
-        balanceLiveData = AccountBalanceRepository.getInstance(appDatabase).get(BuildConfig.TEST_ETHEREUM_WALLET_ADDRESS);
-        tokenBalance = TokenBalanceRepository.getInstance(appDatabase).get(BuildConfig.TEST_ETHEREUM_WALLET_ADDRESS);
+        initViewData();
+        initRepositories();
+
 
     }
 
-    @Nullable
-    public LiveData<AccountBalance> getBalanceLiveData(){
+    private void initRepositories() {
 
-        return balanceLiveData;
+        LiveData<AccountBalance> balanceLiveData = AccountBalanceRepository.getInstance(appDatabase).get(BuildConfig.TEST_ETHEREUM_WALLET_ADDRESS);
+        balanceLiveData.observeForever(accountBalance -> {
+
+            BalanceViewData data = balanceViewData.getValue();
+
+            if(data != null && accountBalance != null){
+
+                data.setEthBalance((float) accountBalance.balance);
+                data.setBtcBalance((float) accountBalance.btcBalance);
+                balanceViewData.postValue(data);
+
+            }
+
+        });
+
+        LiveData<TokenBalance> tokenBalance = TokenBalanceRepository.getInstance(appDatabase).get(BuildConfig.TEST_ETHEREUM_WALLET_ADDRESS);
+        tokenBalance.observeForever(tokenBalance1 -> {
+
+            BalanceViewData data = balanceViewData.getValue();
+
+            if(data != null && tokenBalance1 != null){
+
+                data.setAggregateTokenBalance((float) tokenBalance1.balance);
+                data.setTotalTokens(tokenBalance1.totalTokens);
+                balanceViewData.postValue(data);
+
+            }
+        });
+    }
+
+    private void initViewData() {
+
+        balanceViewData = new MutableLiveData<>();
+        balanceViewData.setValue(new BalanceViewData());
 
     }
 
-    @Nullable
-    public LiveData<TokenBalance> getTokenBalance() {
+    public LiveData<BalanceViewData> getBalanceViewData(){
 
-        return tokenBalance;
+        return balanceViewData;
 
     }
 

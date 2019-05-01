@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import butterknife.ButterKnife;
 
-public abstract class ButterknifeFragment extends Fragment {
+public abstract class ButterKnifeFragment extends Fragment {
 
     @Nullable
     @Override
