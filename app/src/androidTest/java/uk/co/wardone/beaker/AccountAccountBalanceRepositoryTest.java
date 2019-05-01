@@ -23,8 +23,6 @@ import uk.co.wardone.beaker.model.data.model.AccountBalance;
 import uk.co.wardone.beaker.model.data.AppDatabase;
 import uk.co.wardone.beaker.model.repo.AccountBalanceRepository;
 
-import static org.hamcrest.CoreMatchers.is;
-
 @RunWith(AndroidJUnit4.class)
 public class AccountAccountBalanceRepositoryTest {
 
@@ -55,19 +53,19 @@ public class AccountAccountBalanceRepositoryTest {
     @Test
     public void getInitialValue() throws InterruptedException {
 
-        LiveData<AccountBalance> accountLiveData = accountBalanceRepository.get(EtherscanService.TEST_ADDRESS);
+        LiveData<AccountBalance> accountLiveData = accountBalanceRepository.get(BuildConfig.TEST_ETHEREUM_WALLET_ADDRESS);
 
         TestObserver.test(accountLiveData)
                 .awaitValue()
                 .assertHasValue()
-                .assertValue(input -> input.address.equals(EtherscanService.TEST_ADDRESS));
+                .assertValue(input -> input.address.equals(BuildConfig.TEST_ETHEREUM_WALLET_ADDRESS));
 
     }
 
     @Test
     public void testGetAccount(){
 
-        LiveData<AccountBalance> accountLiveData = accountBalanceRepository.get(EtherscanService.TEST_ADDRESS);
+        LiveData<AccountBalance> accountLiveData = accountBalanceRepository.get(BuildConfig.TEST_ETHEREUM_WALLET_ADDRESS);
 //        Assert.ass
 
     }

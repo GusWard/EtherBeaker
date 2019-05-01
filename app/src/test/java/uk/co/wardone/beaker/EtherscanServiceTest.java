@@ -18,7 +18,7 @@ public class EtherscanServiceTest {
 
         EtherscanService etherscanService = EtherscanService.get();
 
-        Balance balance = etherscanService.getBalance(EtherscanService.TEST_API_KEY, EtherscanService.TEST_ADDRESS).execute().body();
+        Balance balance = etherscanService.getBalance(BuildConfig.ETHERSCAN_TEST_API_KEY, BuildConfig.TEST_ETHEREUM_WALLET_ADDRESS).execute().body();
 
         Assert.assertNotNull(balance);
         Assert.assertThat(balance.getMessage(), is("OK"));
